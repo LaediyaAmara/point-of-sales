@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/transaksi/struk/{id}', [TransaksiController::class, 'cetak'])->name('transaksi.struk');
     Route::get('/transaksi/{id}/detail', [TransaksiController::class, 'detail'])->name('transaksi.detail');
     Route::post('/transaksi/{id}/cetak', [TransaksiController::class, 'cetak'])->name('transaksi.cetak');
+Route::get('/transaksi/{id}', [TransaksiController::class, 'show'])->name('transaksi.detail');
 
     Route::post('/transaksi/simpan', [TransaksiController::class, 'simpan'])->name('transaksi.simpan');
     Route::post('/transaksi/tambah', [TransaksiController::class, 'tambah'])->name('transaksi.tambah');

@@ -97,8 +97,14 @@ public function detail($id)
 
 public function cetak($id)
 {
-    $transaksi = Transaksi::findOrFail($id);
-    return view('transaksi.struk', compact('transaksi'));
+    // ambil transaksi + user + detail + barang
+    $transaksi = Transaksi::with(['user', 'detailTransaksi.barang'])->findOrFail($id);
+
+    // ambil detail langsung dari relasi
+    $detail = $transaksi->detailTransaksi;
+
+    // lempar ke view
+    return view('transaksi.print', compact('transaksi', 'detail'));
 }
 
 public function simpan()
@@ -124,5 +130,15 @@ public function simpan()
 
     return redirect()->route('transaksi.histori')->with('success', 'Transaksi berhasil disimpan.');
 }
-
+public function show($id)
+{
+    // Ambil transaksi + relasi user dan detail barang
+    $transaksi = Transaksi::with(['user', 'detailTransaksi.barang'])->findOrFail($id);
+    
+    // Ambil detail dari relasi
+    $detail = $transaksi->detailTransaksi;
+    
+    // Kirim ke view
+    return view('transaksi.detail', compact('transaksi', 'detail'));
+}
 }
