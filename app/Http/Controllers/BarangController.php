@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class BarangController extends Controller
 {
@@ -34,12 +35,13 @@ class BarangController extends Controller
 
         $kode = 'BRG-' . time();
 
-        Barang::create([
-            'nama' => $request->nama,
-            'kode' => $kode,
-            'stok' => $request->stok,
-            'harga' => $request->harga,
-        ]);
+        $barang = Barang::create([
+    'nama' => $request->nama,
+    'harga' => $request->harga,
+    'stok' => $request->stok,
+    'kode_barang' => 'BRG-' . strtoupper(Str::random(5)),
+]);
+
 
         return redirect('/barang')->with('success', 'Barang berhasil ditambahkan');
     }

@@ -25,7 +25,7 @@
                     <tr>
                         <th>No</th>
                         <th>Kode Transaksi</th>
-                         <th>Barcode</th>
+                        
                         <th>Tanggal</th>
                         <th>Total</th>
                         <th>User</th>
@@ -37,10 +37,7 @@
                         <tr>
                             <td>{{ $index + 1 }}</td>
                             <td><span class="badge bg-primary">{{ $trx->kode_transaksi }}</span></td>
-                             <td>
-                {{-- Barcode --}}
-                {!! DNS1D::getBarcodeHTML($trx->kode_transaksi, 'C128') !!}
-            </td>
+
                             <td>{{ \Carbon\Carbon::parse($trx->tanggal)->format('d M Y H:i') }}</td>
                             <td>Rp{{ number_format($trx->total_harga) }}</td>
                             <td>{{ $trx->user->name ?? '-' }}</td>
